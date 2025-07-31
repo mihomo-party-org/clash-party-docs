@@ -1,0 +1,55 @@
+# macOS 故障排除
+
+## macOS 安装问题
+
+如果在安装过程中遇到权限问题或安装失败，请尝试以下步骤：
+
+### 停止服务
+```bash
+sudo launchctl stop party.mihomo.helper
+```
+
+### 卸载服务
+macOS 10及之前：
+```bash
+sudo launchctl unload /Library/LaunchDaemons/party.mihomo.helper.plist
+```
+
+macOS 11及以后版本使用 bootout 命令：
+```bash
+sudo launchctl bootout system /Library/LaunchDaemons/party.mihomo.helper.plist
+sudo launchctl bootout system/party.mihomo.helper
+```
+
+### 删除 plist 文件
+```bash
+sudo rm -f /Library/LaunchDaemons/party.mihomo.helper.plist
+```
+
+### 删除 Helper 可执行文件
+```bash
+sudo rm -f /Library/PrivilegedHelperTools/party.mihomo.helper
+```
+
+### 删除 Helper 的日志文件
+```bash
+sudo rm -f /tmp/party.mihomo.helper.err
+sudo rm -f /tmp/party.mihomo.helper.log
+```
+
+### 删除用户偏好设置
+```bash
+rm -rf ~/Library/Preferences/party.mihomo.app.plist
+```
+
+### 删除数据目录
+```bash
+rm -rf ~/Library/Application\ Support/mihomo-party
+```
+
+### 重启计算机
+完成上述步骤后，重启计算机并重试安装。
+
+## 相关日志
+- 所有日志: `~/Library/Application\ Support/mihomo-party/logs/`（此目录中以单独日期命名的日志为内核日志）
+- 安装日志: `/tmp/party.mihomo.helper.log`
