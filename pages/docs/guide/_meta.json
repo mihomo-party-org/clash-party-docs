@@ -1,4 +1,6 @@
 {
+    "smart-core": "Smart 内核",
+    "smart-core-principles": "Smart Core 工作原理",
     "override": "覆写",
     "icon": "代理组图标",
     "urlscheme": "URL Scheme"
