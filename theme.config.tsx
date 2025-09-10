@@ -5,7 +5,7 @@ import { DocsThemeConfig } from "nextra-theme-docs";
 
 const config: DocsThemeConfig = {
   useNextSeoProps: () => ({
-    titleTemplate: "%s - Mihomo Party - 一个更易用的客户端",
+    titleTemplate: "%s - Clash Party - 一个更易用的客户端",
   }),
   logo: <Logo style={{ height: "24px" }} />,
   docsRepositoryBase:
