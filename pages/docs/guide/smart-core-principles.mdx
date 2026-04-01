@@ -206,8 +206,13 @@ Smart Core 支持使用 LightGBM 机器学习模型进行权重预测：
 
 #### 配置选项
 ```yaml
-# 启用 LightGBM 模型预测
-uselightgbm: true
+proxy-groups:
+  - name: SmartGroup
+    type: smart
+    proxies:
+      - Proxy1
+      - Proxy2
+    uselightgbm: true # 启用 LightGBM 模型预测
 
 # 启用模型自动更新
 lgbm-auto-update: true
@@ -221,14 +226,17 @@ lgbm-url: "https://github.com/vernesong/mihomo/releases/download/LightGBM-Model/
 
 #### 数据收集
 ```yaml
-# 启用数据收集用于模型训练
-collectdata: true
+proxy-groups:
+  - name: SmartGroup
+    type: smart
+    proxies:
+      - Proxy1
+      - Proxy2
+    collectdata: true # 启用数据收集用于模型训练
+    sample-rate: 1 # 数据采样率（0-1）
 
-# 数据采样率（0-1）
-sample-rate: 1
-
-# 数据收集文件大小限制（MB）
-smart-collector-size: 100
+profile:
+  smart-collector-size: 100 # 数据收集文件大小限制（MB）
 ```
 
 ### 特征工程
@@ -248,11 +256,17 @@ smart-collector-size: 100
 
 ## 高级配置
 
-### 策略优先级设置
+### 策略设置
 
 ```yaml
-# 策略优先级配置
-policy-priority: "Premium:0.9;SG:1.3"
+proxy-groups:
+  - name: SmartGroup
+    type: smart
+    proxies:
+      - Proxy1
+      - Proxy2
+    policy-priority: "Premium:0.9;SG:1.3" # 策略优先级配置
+    prefer-asn: false # 倾向选择 ASN 更匹配的节点
 ```
 
 - **格式**：`策略名正则:系数`
@@ -262,6 +276,16 @@ policy-priority: "Premium:0.9;SG:1.3"
   - `= 0`：总是优先使用（不推荐）
 
 ### 策略选择策略
+
+```yaml
+proxy-groups:
+  - name: SmartGroup
+    type: smart
+    proxies:
+      - Proxy1
+      - Proxy2
+    strategy: sticky-sessions # v1.19.17 已弃用
+```
 
 #### Sticky Sessions（默认）
 - **特点**：更稳定和平滑的节点切换逻辑
